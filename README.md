@@ -40,3 +40,25 @@ docker run -p 8080:80 your_username/main_app:latest
 docker run -d --name my_app2 your_username/app2:latest
 ```
 描述: 在背景運行名為 my_app2 的 your_username/app2:latest 映像檔。
+
+
+
+
+## 專案 Container Image 自動化建置與 Tagging 邏輯
+
+本專案使用 GitHub Actions 自動化產生 Container Image。
+
+**自動化建置邏輯：**
+
+當程式碼變動時（推送、PR、手動觸發），GitHub Actions 會自動：
+
+1.  下載最新程式碼。
+2.  根據 `Dockerfile` 建置 Docker Image。
+
+**Tag 的選擇邏輯：**
+
+* **`latest`**: 主要分支最新的穩定版本。
+* **`vX.Y.Z`**: 對應發布版本 (Git Tag)。
+* **`pr-XXX`**: 針對 Pull Request 的測試版本。
+
+透過自動化建置和清晰的 Tag 策略，方便管理不同版本和用途的 Container Image。
